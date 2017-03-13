@@ -1,0 +1,63 @@
+{% load static staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KEGG pathway mapping</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.maphilight.min.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.map').maphilight({
+                fillColor: 'red'
+            });
+        })
+    </script>
+</head>
+<body>
+<div>
+    <h1>KEGG Pathway mapping </h1>
+    <h3 class='page-header'>
+        <a href="{{ pathway.get_kegg_url }}" target="_blank">{{ pathway.name }}</a>
+    </h3>
+    <p>Correspond compounds are highlighted in red. </p>
+    <a href="#" data-toggle="tooltip" data-placement="top" title="<b>Hooray!</b>">Top</a>
+</div>
+<div>
+    <img class="map" src="{{ pathway.get_kegg_image }}" alt="loading kegg path" id="kegg_pathway"
+         usemap="#pathway_data">
+    <map name="pathway_data">
+        {% for cpd, coords in mapping_kegg_cpds.items %}
+            {% for x, y in coords %}
+                <area id="{{ x }},{{ y }},4" shape="circle" coords="{{ x }},{{ y }},5" class="group"
+                      href="#"
+                      data-toggle="popover"
+                      placement="left"
+                      title="<b>{{ cpd }}</b>"
+                      data-content="test"
+                      data-maphilight='{"strokeColor":"#0000","strokeWidth":1,"fillColor":"ff0000","fillOpacity":0.6, "alwaysOn": true}'>
+            {% endfor %}
+        {% endfor %}
+    </map>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            html: "true",
+            trigger: "hover",
+            placement: "top",
+            template: '<div class="popover" role="tooltip"><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+        });
+    });
+    $(document).mousemove(function (e) {
+        var mouseX = e.pageX - $('#kegg_pathway').offset().left;
+        var mouseY = e.pageY - $('#kegg_pathway').offset().top;
+        $('.popover').css({'top': mouseY + 120, 'left': mouseX - 40}).fadeIn('slow');
+    });
+</script>
+</body>
+</html>
