@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^yatcm/about/$', AboutView.as_view(), name="about"),
     url(r'^yatcm/contact/$', ContactView.as_view(), name="contact"),
     url(r'^yatcm/admin/', admin.site.urls),
-    url('^yatcm/graphql', GraphQLView.as_view(graphiql=True)),
+    url('^yatcm/graphql', GraphQLView.as_view(graphiql=True), name="graphql"),
     url(r"^yatcm/", include('compounds.urls')),
     # url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'yatcm/api-auth', include("rest_framework.urls", namespace='rest_framework')),
