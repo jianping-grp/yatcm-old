@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     # 'rest_framework_docs',
+    'graphene_django',
     "rest_framework_swagger",
     "corsheaders",
     'bootstrap_pagination'
@@ -95,14 +96,6 @@ DATABASES = {
         'PASSWORD': 'skyc202',
         'PORT': 5432,
         'HOST': 'localhost'
-    },
-    'TEST': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'yatcm_test',
-        'USER': 'jianping',
-        'PASSWORD': 'skyc202',
-        'PORT': 5432,
-        'HOST': 'localhost'
     }
 }
 
@@ -143,6 +136,16 @@ STATIC_URL = '/yatcm/static/'
 MEDIA_URL = '/yatcm/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
+# graphql
+GRAPHENE = {
+    'SCHEMA': 'yatcm.schema.schema',
+    'SCHEMA_INDENT': 2,
+    'MIDDLEWARE': (
+        'graphene_django.debug.DjangoDebugMiddleware',
+    )
+}
+
 
 # rest frame pagination
 REST_FRAMEWORK = {
