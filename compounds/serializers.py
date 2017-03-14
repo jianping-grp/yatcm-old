@@ -44,8 +44,8 @@ class EnglishIdentitySerializer(serializers.ModelSerializer):
 
 class CompoundSerializer(serializers.ModelSerializer):
     herb_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    englisthidentity_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    chineseidentity_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    #englisthidentity_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    #chineseidentity_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Compound
@@ -104,7 +104,10 @@ class KEGGCompoundSerializer(serializers.ModelSerializer):
 class KEGGPathwaySerializer(serializers.ModelSerializer):
     class Meta:
         model = KEGGPathway
-        fields = "__all__"
+        exclude = [
+            'kgml',
+            'image'
+        ]
 
 
 class KEGGSimilaritySerializer(serializers.ModelSerializer):

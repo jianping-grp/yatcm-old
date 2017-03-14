@@ -147,7 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 # rest frame pagination
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 50
+    "PAGE_SIZE": 1000000000
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
