@@ -1,0 +1,14 @@
+graphene
+graphene-django
+django_graphiql
+graphql-core
+django==1.9
+django-filter==0.11.0
+djangorestframework
+djangorestframework-recursive
+django-rest-swagger
+django-cors-headers
+django-bootstrap-pagination
+django-mptt
+django-rdkit
+psycopg2
