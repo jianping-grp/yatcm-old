@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 from rest_framework_swagger.views import get_swagger_view
 from .views import IndexView, AboutView, ContactView
@@ -28,7 +29,7 @@ urlpatterns = [
     url(r'^yatcm/about/$', AboutView.as_view(), name="about"),
     url(r'^yatcm/contact/$', ContactView.as_view(), name="contact"),
     url(r'^yatcm/admin/', admin.site.urls),
-    url('^yatcm/graphql', GraphQLView.as_view(graphiql=True), name="graphql"),
+    url('^yatcm/graphql', csrf_exempt(GraphQLView.as_view(graphiql=True)), name="graphql"),
     url(r"^yatcm/", include('compounds.urls')),
     # url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'yatcm/api-auth', include("rest_framework.urls", namespace='rest_framework')),
